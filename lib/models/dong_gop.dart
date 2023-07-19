@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'package:quan_ly_dan_cu/config.dart';
 import 'ho_khau.dart';
 
 class DongGop {
@@ -40,7 +41,7 @@ class DongGop {
   //   return compute(parseKhoanPhi,response.body);
   // }
   static Future<DongGop> getById(int id) async {
-    Response response = await get(Uri.parse("http://10.0.2.2:8081/api/v1/dong-gop?id=${id}"));
+    Response response = await get(Uri.parse("$URI/dong-gop?id=${id}"));
     DongGop dongGop = DongGop.fromJson(jsonDecode(response.body));
     return dongGop;
   }
@@ -49,7 +50,7 @@ class DongGop {
     final Map<String,dynamic> createDonggop = dongGop.toJson();
     createDonggop['idKhoanPhi'] = id;
     await post(
-      Uri.parse('http://10.0.2.2:8081/api/v1/dong-gop'),
+      Uri.parse('$URI/dong-gop'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -61,7 +62,7 @@ class DongGop {
 
   static void update(DongGop dongGop)async{
     await put(
-      Uri.parse('http://10.0.2.2:8081/api/v1/dong-gop?id=${int.parse(dongGop.id!)}'),
+      Uri.parse('$URI/dong-gop?id=${int.parse(dongGop.id!)}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -73,7 +74,7 @@ class DongGop {
 
   static void deleteById(String id) async {
     await delete(
-      Uri.parse("http://10.0.2.2:8081/api/v1/dong-gop?id=${int.parse(id)}"),
+      Uri.parse("$URI/dong-gop?id=${int.parse(id)}"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

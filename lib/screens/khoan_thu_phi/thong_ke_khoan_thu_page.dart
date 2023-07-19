@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import '../../config.dart';
 import '../../widgets/input_field.dart';
 
 class KhoanThuDTO {
@@ -30,7 +31,7 @@ class KhoanThuDTO {
     String startDate = DateFormat("yyyy-MM-dd").format(from).toString();
     String endDate = DateFormat("yyyy-MM-dd").format(to).toString();
     final response = await client.get(Uri.parse(
-        "http://10.0.2.2:8081/api/v1/dong-gop/$choose?name=$input&from=$startDate&to=$endDate"));
+        "$URI/dong-gop/$choose?name=$input&from=$startDate&to=$endDate"));
     return compute(parsedKhoanThuDTO, response.body);
   }
 }

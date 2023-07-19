@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:quan_ly_dan_cu/models/sinh_hoat.dart';
+import '../../config.dart';
 import '../../widgets/input_field.dart';
 
 class SinhHoatDTO {
@@ -29,7 +29,7 @@ class SinhHoatDTO {
     String startDate = DateFormat("yyyy-MM-dd").format(from).toString();
     String endDate = DateFormat("yyyy-MM-dd").format(to).toString();
     final response = await client.get(Uri.parse(
-        "http://10.0.2.2:8081/api/v1/tham-gia/$choose?name=$input&from=$startDate&to=$endDate"));
+        "$URI/tham-gia/$choose?name=$input&from=$startDate&to=$endDate"));
     return compute(parsedSinhHoatDTO, response.body);
   }
 }

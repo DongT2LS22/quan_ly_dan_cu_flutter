@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
+import '../config.dart';
+
 class NhanKhau {
   String? id;
   String? hoten;
@@ -32,7 +34,7 @@ class NhanKhau {
   }
 
   static Future<List<NhanKhau>> getAll(Client client) async {
-    final response = await client.get(Uri.parse("http://10.0.2.2:8081/api/v1/tham-gia/nhan-khau"));
+    final response = await client.get(Uri.parse("$URI/tham-gia/nhan-khau"));
     print("Kha OKE");
     return compute(parseNhanKhau,response.body);
   }

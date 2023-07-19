@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:flutter/foundation.dart';
+import 'package:quan_ly_dan_cu/config.dart';
 import 'package:quan_ly_dan_cu/models/tham_gia.dart';
 
 class SinhHoat {
@@ -55,13 +56,13 @@ class SinhHoat {
 
   static Future<List<SinhHoat>> getAll(Client client) async {
     final response = await client
-        .get(Uri.parse("http://10.0.2.2:8081/api/v1/sinh-hoat/all"));
+        .get(Uri.parse("$URI/sinh-hoat/all"));
     return compute(parsedSinhHoat, response.body);
   }
 
   static create(SinhHoat sinhHoat) async {
     await post(
-      Uri.parse('http://10.0.2.2:8081/api/v1/sinh-hoat'),
+      Uri.parse('$URI/sinh-hoat'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -71,7 +72,7 @@ class SinhHoat {
 
   static update(SinhHoat sinhHoat) async {
     await put(
-      Uri.parse('http://10.0.2.2:8081/api/v1/sinh-hoat?id=${sinhHoat.id}'),
+      Uri.parse('$URI/sinh-hoat?id=${sinhHoat.id}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -81,7 +82,7 @@ class SinhHoat {
 
   static deleteByID(int id) async {
     await delete(
-      Uri.parse('http://10.0.2.2:8081/api/v1/sinh-hoat?id=$id'),
+      Uri.parse('$URI/sinh-hoat?id=$id'),
     );
   }
 
@@ -90,7 +91,7 @@ class SinhHoat {
     data['sinhHoat'] = idSinhHoat;
     data['nhanKhau'] = idNhanKhau;
     await post(
-      Uri.parse('http://10.0.2.2:8081/api/v1/tham-gia'),
+      Uri.parse('$URI/tham-gia'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

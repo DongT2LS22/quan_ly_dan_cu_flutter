@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:quan_ly_dan_cu/config.dart';
 import 'package:quan_ly_dan_cu/models/nhan_khau.dart';
 
 class ThamGia {
@@ -21,7 +22,7 @@ class ThamGia {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['coMat'] = thamGia.thamgia;
     await put(
-      Uri.parse('http://10.0.2.2:8081/api/v1/tham-gia?id=${thamGia.id}'),
+      Uri.parse('$URI/tham-gia?id=${thamGia.id}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

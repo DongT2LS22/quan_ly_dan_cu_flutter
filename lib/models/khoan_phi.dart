@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
+import '../config.dart';
 import 'dong_gop.dart';
 import 'package:http/http.dart';
 
@@ -58,14 +59,14 @@ class KhoanPhi {
   }
 
   static Future<List<KhoanPhi>> getAll(Client client) async {
-    final response = await client.get(Uri.parse("http://10.0.2.2:8081/api/v1/khoan-phi/all"));
+    final response = await client.get(Uri.parse("$URI/khoan-phi/all"));
     return compute(parseKhoanPhi,response.body);
   }
 
   static create(KhoanPhi khoanPhi) async {
     Map<String,dynamic> khoanphi = khoanPhi.toJson();
     await post(
-      Uri.parse('http://10.0.2.2:8081/api/v1/khoan-phi'),
+      Uri.parse('$URI/khoan-phi'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -77,13 +78,13 @@ class KhoanPhi {
 
   static deleteByID(int id) async {
     await delete(
-      Uri.parse('http://10.0.2.2:8081/api/v1/khoan-phi?id=$id'),
+      Uri.parse('$URI/khoan-phi?id=$id'),
     );
   }
 
   static update(KhoanPhi khoanPhi) async {
     await put(
-      Uri.parse('http://10.0.2.2:8081/api/v1/khoan-phi?id=${khoanPhi.id}'),
+      Uri.parse('$URI/khoan-phi?id=${khoanPhi.id}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
